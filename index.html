@@ -2,11 +2,40 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>My_Website</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>线条本条的网站</title>
+    <style>
+        body {
+            font-family: "思源黑体 Light", "Source Han Sans CN Light", sans-serif;
+            background-color: rgb(70, 70, 70);
+            margin: 0;
+            padding: 0;
+        }
+        .title {
+            width: 100%;
+            background-color: skyblue;
+            display: flex;
+            opacity: 95%;
+            align-items: center;
+            justify-content: center;
+            height: 10vh;
+            min-height: 50px;
+            max-height: 80px;
+            padding: 0 15px;
+            box-sizing: border-box;
+        }
+        .title_text {
+            color: white;
+            margin: 0;
+            /* clamp(最小尺寸, 相对尺寸, 最大尺寸) */
+            font-size: clamp(1.2rem, 4vw, 2rem);
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-<h1>这是我的测试网站</h1>
-<h2>This is my test website</h2>
-<a href="/Codes/打枪游戏.cpp" download="打枪游戏.cpp">下载 打枪游戏.cpp</a>
+<div class="title">
+    <h1 class="title_text">欢迎来到线条本条的网站！</h1>
+</div>
 </body>
 </html>
