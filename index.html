@@ -7,16 +7,16 @@
     <style>
         body {
             font-family: "思源黑体 Light", "Source Han Sans CN Light", sans-serif;
-            background-color: rgb(50, 50, 50);
+            background-color: rgb(230, 240, 250);
             margin: 0;
             padding: 0;
             transition: background-color 0.3s ease;
         }
 
         .title {
+            display: flex;
             width: 100%;
             background-color: skyblue;
-            display: flex;
             opacity: 95%;
             align-items: center;
             justify-content: space-between;
@@ -29,15 +29,16 @@
         }
 
         .titleText {
+            display: flex;
             color: black;
-            margin: 0;
             font-size: clamp(1.2rem, 4vw, 2rem);
             text-align: center;
+            transition: color 0.3s ease;
         }
 
         .node {
-            background: white;
-            border: none;
+            display: flex;
+            background: rgb(20, 30, 45);
             font-size: clamp(1.2rem, 3vw, 1.5rem);
             cursor: pointer;
             padding: 1rem;
@@ -46,9 +47,30 @@
         }
 
         .node:hover {
-            background: rgb(245, 245, 245);
-            transform: translateY(-2px);
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .download {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 90vh;
+        }
+
+        .downloadList {
+            background-color: white;
+            border: 2px solid grey;
+            border-radius: 10%;
+            padding: 15px 13px 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .downloadButton {
+            padding: 8px 16px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -57,24 +79,36 @@
     <h1 class="titleText">欢迎来到线条本条的网站！</h1>
     <button class="node" onclick="ChangeModes()"></button>
 </div>
+<div class="download">
+    <div class="downloadList">
+        <p>点击按钮下载 cpp 程序</p>
+        <button class="downloadButton" onclick="Download('/Codes/打枪游戏.cpp')">点击下载 打枪游戏.cpp</button>
+    </div>
+</div>
 <script>
-    let Now_Mode = "Day";
+    let Now_Mode = true;
+    const title = document.querySelector(".title");
+    const titleText = document.querySelector(".titleText");
+    const Node = document.querySelector(".node");
+    const downloadList = document.querySelector(".downloadList");
 
     function ChangeModes() {
-        const title = document.querySelector(".title");
-        const titleText = document.querySelector(".titleText");
+        document.body.style.backgroundColor = Now_Mode ? "rgb(30, 40, 55)" : "rgb(230, 240, 250)";
+        title.style.backgroundColor = Now_Mode ? "black" : "skyblue";
+        titleText.style.color = Now_Mode ? "white" : "black";
+        Node.style.backgroundColor = Now_Mode ? "white" : "rgb(20, 30, 45)";
+        downloadList.style.backgroundColor = Now_Mode ? "rgb(210, 210, 210)" : "white";
+        downloadList.style.border = Now_Mode ? "2px solid white" : "2px solid grey";
+        Now_Mode = !Now_Mode;
+    }
 
-        if (Now_Mode === "Day") {
-            Now_Mode = "Night";
-            document.body.style.backgroundColor = "rgb(245, 245, 245)";
-            title.style.backgroundColor = "darkblue";
-            titleText.style.color = "white";
-        } else {
-            Now_Mode = "Day";
-            document.body.style.backgroundColor = "rgb(50, 50, 50)";
-            title.style.backgroundColor = "skyblue";
-            titleText.style.color = "black";
-        }
+    function Download(url) {
+        const link = document.createElement('a');
+        link.href = url;
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     }
 </script>
 </body>
