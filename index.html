@@ -7,35 +7,75 @@
     <style>
         body {
             font-family: "思源黑体 Light", "Source Han Sans CN Light", sans-serif;
-            background-color: rgb(70, 70, 70);
+            background-color: rgb(50, 50, 50);
             margin: 0;
             padding: 0;
+            transition: background-color 0.3s ease;
         }
+
         .title {
             width: 100%;
             background-color: skyblue;
             display: flex;
             opacity: 95%;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             height: 10vh;
             min-height: 50px;
             max-height: 80px;
             padding: 0 15px;
             box-sizing: border-box;
+            transition: background-color 0.3s ease;
         }
-        .title_text {
-            color: white;
+
+        .titleText {
+            color: black;
             margin: 0;
-            /* clamp(最小尺寸, 相对尺寸, 最大尺寸) */
             font-size: clamp(1.2rem, 4vw, 2rem);
             text-align: center;
+        }
+
+        .node {
+            background: white;
+            border: none;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            cursor: pointer;
+            padding: 1rem;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .node:hover {
+            background: rgb(245, 245, 245);
+            transform: translateY(-2px);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
 <body>
 <div class="title">
-    <h1 class="title_text">欢迎来到线条本条的网站！</h1>
+    <h1 class="titleText">欢迎来到线条本条的网站！</h1>
+    <button class="node" onclick="ChangeModes()"></button>
 </div>
+<script>
+    let Now_Mode = "Day";
+
+    function ChangeModes() {
+        const title = document.querySelector(".title");
+        const titleText = document.querySelector(".titleText");
+
+        if (Now_Mode === "Day") {
+            Now_Mode = "Night";
+            document.body.style.backgroundColor = "rgb(245, 245, 245)";
+            title.style.backgroundColor = "darkblue";
+            titleText.style.color = "white";
+        } else {
+            Now_Mode = "Day";
+            document.body.style.backgroundColor = "rgb(50, 50, 50)";
+            title.style.backgroundColor = "skyblue";
+            titleText.style.color = "black";
+        }
+    }
+</script>
 </body>
 </html>
