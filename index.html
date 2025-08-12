@@ -7,17 +7,17 @@
     <style>
         body {
             font-family: "思源黑体 Light", "Source Han Sans CN Light", sans-serif;
-            background-color: rgb(230, 240, 250);
+            background: #ffffff;
             margin: 0;
             padding: 0;
-            transition: background-color 0.3s ease;
+            transition: background 0.3s ease;
         }
 
         .title {
             display: flex;
             width: 100%;
-            background-color: skyblue;
-            opacity: 95%;
+            background: #f3f3f3;
+            opacity: 0.95;
             align-items: center;
             justify-content: space-between;
             height: 10vh;
@@ -25,20 +25,18 @@
             max-height: 80px;
             padding: 0 15px;
             box-sizing: border-box;
-            transition: background-color 0.3s ease;
+            transition: background 0.3s ease;
         }
 
         .titleText {
-            display: flex;
-            color: black;
+            color: #000000;
             font-size: clamp(1.2rem, 4vw, 2rem);
             text-align: center;
             transition: color 0.3s ease;
         }
 
         .node {
-            display: flex;
-            background: rgb(20, 30, 45);
+            background: #141e2d;
             font-size: clamp(1.2rem, 3vw, 1.5rem);
             cursor: pointer;
             padding: 1rem;
@@ -59,8 +57,8 @@
         }
 
         .downloadList {
-            background-color: white;
-            border: 2px solid grey;
+            background: #ebebeb;
+            border: 2px solid #808080;
             border-radius: 10%;
             padding: 15px 13px 30px;
             display: flex;
@@ -71,7 +69,7 @@
         .downloadButton {
             padding: 8px 16px;
             cursor: pointer;
-            background-color: skyblue;
+            background: #87ceeb;
             border-radius: 5%;
         }
     </style>
@@ -84,24 +82,38 @@
 <div class="download">
     <div class="downloadList">
         <p>点击按钮下载 cpp 程序</p>
-        <button class="downloadButton" onclick="document.getElementById('downloadLink').click()">下载 打枪游戏.cpp</button>
+
+        <button class="downloadButton" onclick="document.getElementById('downloadLink').click()">
+            <svg width="20" height="20" viewBox="0 2 24 24" xmlns="http://www.w3.org/2000/svg"
+                 style="vertical-align: middle">
+                <path d="M11 5C11 4.44772 11.4477 4 12 4C12.5523 4 13 4.44772 13 5V12.1578L16.2428 8.91501L17.657 10.3292L12.0001 15.9861L6.34326 10.3292L7.75748 8.91501L11 12.1575V5Z"
+                      fill="currentColor"/>
+                <path d="M4 14H6V18H18V14H20V18C20 19.1046 19.1046 20 18 20H6C4.89543 20 4 19.1046 4 18V14Z"
+                      fill="currentColor"/>
+            </svg>
+            下载 打枪游戏.cpp
+        </button>
         <a id="downloadLink" href="/Codes/打枪游戏.cpp" download="打枪游戏.cpp" style="display: none"></a>
     </div>
 </div>
 <script>
     let Now_Mode = true;
-    const title = document.querySelector(".title");
-    const titleText = document.querySelector(".titleText");
-    const Node = document.querySelector(".node");
-    const downloadList = document.querySelector(".downloadList");
+
+    const all = {
+        body: document.body,
+        title: document.querySelector(".title"),
+        titleText: document.querySelector(".titleText"),
+        node: document.querySelector(".node"),
+        downloadList: document.querySelector(".downloadList")
+    };
 
     function ChangeModes() {
-        document.body.style.backgroundColor = Now_Mode ? "rgb(30, 40, 55)" : "rgb(230, 240, 250)";
-        title.style.backgroundColor = Now_Mode ? "black" : "skyblue";
-        titleText.style.color = Now_Mode ? "white" : "black";
-        Node.style.backgroundColor = Now_Mode ? "white" : "rgb(20, 30, 45)";
-        downloadList.style.backgroundColor = Now_Mode ? "rgb(210, 210, 210)" : "white";
-        downloadList.style.border = Now_Mode ? "2px solid white" : "2px solid grey";
+        all.body.style.background = Now_Mode ? "#1e2837" : "#ffffff";
+        all.title.style.background = Now_Mode ? "#01050a" : "#f3f3f3";
+        all.titleText.style.color = Now_Mode ? "#ffffff" : "#000000";
+        all.node.style.background = Now_Mode ? "#ffffff" : "#141e2d";
+        all.downloadList.style.background = Now_Mode ? "#d2d2d2" : "#ebebeb";
+        all.downloadList.style.border = Now_Mode ? "2px solid #ffffff" : "2px solid #808080";
         Now_Mode = !Now_Mode;
     }
 </script>
