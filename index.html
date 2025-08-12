@@ -16,7 +16,7 @@
         .title {
             display: flex;
             width: 100%;
-            background: #f3f3f3;
+            background: #f2f2f2;
             opacity: 0.95;
             align-items: center;
             justify-content: space-between;
@@ -54,14 +54,14 @@
             justify-content: center;
             align-items: center;
             height: 90vh;
+            flex-direction: column;
         }
 
         .downloadList {
             background: #ebebeb;
             border: 2px solid #808080;
-            border-radius: 10%;
+            border-radius: 5%;
             padding: 15px 13px 30px;
-            display: flex;
             flex-direction: column;
             align-items: center;
         }
@@ -82,7 +82,6 @@
 <div class="download">
     <div class="downloadList">
         <p>点击按钮下载 cpp 程序</p>
-
         <button class="downloadButton" onclick="document.getElementById('downloadLink').click()">
             <svg width="20" height="20" viewBox="0 2 24 24" xmlns="http://www.w3.org/2000/svg"
                  style="vertical-align: middle">
@@ -94,6 +93,9 @@
             下载 打枪游戏.cpp
         </button>
         <a id="downloadLink" href="/Codes/打枪游戏.cpp" download="打枪游戏.cpp" style="display: none"></a>
+    </div>
+    <div>
+        <span>单击此处<a href="https://a-red-apple.github.io/Games/gunGame.html">在线游玩</a></span>
     </div>
 </div>
 <script>
@@ -109,10 +111,9 @@
 
     function ChangeModes() {
         all.body.style.background = Now_Mode ? "#1e2837" : "#ffffff";
-        all.title.style.background = Now_Mode ? "#01050a" : "#f3f3f3";
+        all.title.style.background = Now_Mode ? "#01050a" : "#f2f2f2";
         all.titleText.style.color = Now_Mode ? "#ffffff" : "#000000";
         all.node.style.background = Now_Mode ? "#ffffff" : "#141e2d";
-        all.downloadList.style.background = Now_Mode ? "#d2d2d2" : "#ebebeb";
         all.downloadList.style.border = Now_Mode ? "2px solid #ffffff" : "2px solid #808080";
         Now_Mode = !Now_Mode;
     }
