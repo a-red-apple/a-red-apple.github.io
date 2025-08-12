@@ -72,6 +72,10 @@
             background: #87ceeb;
             border-radius: 5%;
         }
+
+        .playOnlineGame {
+            color: black;
+        }
     </style>
 </head>
 <body>
@@ -95,7 +99,7 @@
         <a id="downloadLink" href="/Codes/打枪游戏.cpp" download="打枪游戏.cpp" style="display: none"></a>
     </div>
     <div>
-        <span>单击此处<a href="https://a-red-apple.github.io/Games/gunGame.html">在线游玩</a></span>
+        <span class="playOnlineGame">单击此处<a class="playOnlineGameLink" style="color: #0000ff" href="https://a-red-apple.github.io/Games/gunGame.html">在线游玩</a></span>
     </div>
 </div>
 <script>
@@ -106,15 +110,19 @@
         title: document.querySelector(".title"),
         titleText: document.querySelector(".titleText"),
         node: document.querySelector(".node"),
-        downloadList: document.querySelector(".downloadList")
+        downloadList: document.querySelector(".downloadList"),
+        playOnlineGame: document.querySelector(".playOnlineGame"),
+        playOnlineGameLink: document.querySelector(".playOnlineGameLink")
     };
 
     function ChangeModes() {
         all.body.style.background = Now_Mode ? "#1e2837" : "#ffffff";
         all.title.style.background = Now_Mode ? "#01050a" : "#f2f2f2";
         all.titleText.style.color = Now_Mode ? "#ffffff" : "#000000";
-        all.node.style.background = Now_Mode ? "#ffffff" : "#141e2d";
+        all.node.style.background = Now_Mode ? "#ffffff" : "#1e2837";
         all.downloadList.style.border = Now_Mode ? "2px solid #ffffff" : "2px solid #808080";
+        all.playOnlineGame.style.color = Now_Mode ? "#ffffff" : "#000000";
+        all.playOnlineGameLink.style.color = Now_Mode ? "#29ff29" : "#0000ff";
         Now_Mode = !Now_Mode;
     }
 </script>
