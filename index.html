@@ -71,6 +71,8 @@
         .downloadButton {
             padding: 8px 16px;
             cursor: pointer;
+            background-color: skyblue;
+            border-radius: 5%;
         }
     </style>
 </head>
@@ -82,7 +84,8 @@
 <div class="download">
     <div class="downloadList">
         <p>点击按钮下载 cpp 程序</p>
-        <button class="downloadButton" onclick="Download('/Codes/打枪游戏.cpp')">点击下载 打枪游戏.cpp</button>
+        <button class="downloadButton" onclick="document.getElementById('downloadLink').click()">下载 打枪游戏.cpp</button>
+        <a id="downloadLink" href="/Codes/打枪游戏.cpp" download="打枪游戏.cpp" style="display: none"></a>
     </div>
 </div>
 <script>
@@ -100,15 +103,6 @@
         downloadList.style.backgroundColor = Now_Mode ? "rgb(210, 210, 210)" : "white";
         downloadList.style.border = Now_Mode ? "2px solid white" : "2px solid grey";
         Now_Mode = !Now_Mode;
-    }
-
-    function Download(url) {
-        const link = document.createElement('a');
-        link.href = url;
-        link.style.display = 'none';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
     }
 </script>
 </body>
