@@ -28,14 +28,14 @@
             transition: background 0.3s ease;
         }
 
-        .titleText {
+        #titleText {
             color: #000000;
             font-size: clamp(1.2rem, 4vw, 2rem);
             text-align: center;
             transition: color 0.3s ease;
         }
 
-        .node {
+        #node {
             background: #141e2d;
             font-size: clamp(1.2rem, 3vw, 1.5rem);
             cursor: pointer;
@@ -44,7 +44,7 @@
             transition: all 0.3s ease;
         }
 
-        .node:hover {
+        #node:hover {
             transform: translateY(-3px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
@@ -58,35 +58,40 @@
         }
 
         .downloadList {
-            background: #ebebeb;
-            border: 2px solid #808080;
+            background: #f2f2f2;
+            border: 2px solid #e4e4e4;
             border-radius: 5%;
             padding: 15px 13px 30px;
             flex-direction: column;
             align-items: center;
         }
 
-        .downloadButton {
+        #downloadButton {
             padding: 8px 16px;
             cursor: pointer;
             background: #87ceeb;
             border-radius: 5%;
         }
 
-        .playOnlineGame {
-            color: black;
+        .end {
+            display: flex;
+            height: 7vh;
+            background: #f5f5fa;
+            align-items: center;
+            justify-content: center;
+            border-top: 1px solid #e4e4e4;
         }
     </style>
 </head>
 <body>
 <div class="title">
-    <h1 class="titleText">欢迎来到线条本条的网站！</h1>
-    <button class="node" onclick="ChangeModes()"></button>
+    <h1 id="titleText">欢迎来到线条本条的网站！</h1>
+    <button id="node" onclick="ChangeModes()"></button>
 </div>
 <div class="download">
     <div class="downloadList">
         <p>点击按钮下载 cpp 程序</p>
-        <button class="downloadButton" onclick="document.getElementById('downloadLink').click()">
+        <button id="downloadButton" onclick="document.getElementById('downloadLink').click()">
             <svg width="20" height="20" viewBox="0 2 24 24" xmlns="http://www.w3.org/2000/svg"
                  style="vertical-align: middle">
                 <path d="M11 5C11 4.44772 11.4477 4 12 4C12.5523 4 13 4.44772 13 5V12.1578L16.2428 8.91501L17.657 10.3292L12.0001 15.9861L6.34326 10.3292L7.75748 8.91501L11 12.1575V5Z"
@@ -98,9 +103,12 @@
         </button>
         <a id="downloadLink" href="/Codes/打枪游戏.cpp" download="打枪游戏.cpp" style="display: none"></a>
     </div>
-    <div>
-        <span class="playOnlineGame">单击此处<a class="playOnlineGameLink" style="color: #0000ff" href="https://a-red-apple.github.io/Games/gunGame.html">在线游玩</a></span>
-    </div>
+    <span id="playOnlineGame" style="color: black; transition: all 0.25s ease;">单击此处<a id="playOnlineGameLink"
+                                                                                           style="color: #0000ff; transition: all 0.25s ease;"
+                                                                                           href="/Games/gunGame.html">在线游玩</a></span>
+</div>
+<div class="end">
+    <span>Copyright © 2025–2025 <strong>面条本条的网站 a-red-apple.github.io</strong> All Rights Reserved.</span>
 </div>
 <script>
     let Now_Mode = true;
@@ -108,11 +116,12 @@
     const all = {
         body: document.body,
         title: document.querySelector(".title"),
-        titleText: document.querySelector(".titleText"),
-        node: document.querySelector(".node"),
+        titleText: document.querySelector("#titleText"),
+        node: document.querySelector("#node"),
         downloadList: document.querySelector(".downloadList"),
-        playOnlineGame: document.querySelector(".playOnlineGame"),
-        playOnlineGameLink: document.querySelector(".playOnlineGameLink")
+        playOnlineGame: document.querySelector("#playOnlineGame"),
+        playOnlineGameLink: document.querySelector("#playOnlineGameLink"),
+        end: document.querySelector(".end"),
     };
 
     function ChangeModes() {
@@ -120,7 +129,7 @@
         all.title.style.background = Now_Mode ? "#01050a" : "#f2f2f2";
         all.titleText.style.color = Now_Mode ? "#ffffff" : "#000000";
         all.node.style.background = Now_Mode ? "#ffffff" : "#1e2837";
-        all.downloadList.style.border = Now_Mode ? "2px solid #ffffff" : "2px solid #808080";
+        all.downloadList.style.border = Now_Mode ? "2px solid #ffffff" : "2px solid #e4e4e4";
         all.playOnlineGame.style.color = Now_Mode ? "#ffffff" : "#000000";
         all.playOnlineGameLink.style.color = Now_Mode ? "#29ff29" : "#0000ff";
         Now_Mode = !Now_Mode;
