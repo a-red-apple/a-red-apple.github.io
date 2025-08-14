@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>打枪游戏</title>
+    <style>
+        * {
+            font-family: "思源黑体 Light", "Source Han Sans CN Light", sans-serif;
+            margin: 0;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f2f2f2;
+            min-height: 100vh;
+            max-height: 100vh;
+        }
+
+        .gameArea {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .buttonGroup {
+            display: flex;
+            gap: 3vw;
+        }
+
+        .button {
+            border: none;
+            font-size: 1.1vw;
+            height: 2.3vw;
+            width: 5.2vw;
+            line-height: 2.3vw;
+            text-align: center;
+            border-radius: 4px;
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+            padding: 0 0.08vw 0 0;
+        }
+
+        #buttonAgain {
+            border: none;
+            font-size: 1.1vw;
+            height: 2.3vw;
+            width: 5.2vw;
+            line-height: 2.3vw;
+            text-align: center;
+            border-radius: 4px;
+            background: #ff0b0b;
+            color: white;
+            cursor: pointer;
+            padding: 0 0.08vw 0 0;
+        }
+
+        .level-1 { margin-left: 30px; }
+        .level-2 { margin-left: 60px; }
+        .level-3 { margin-left: 90px; }
+    </style>
+</head>
+<body>
+<div class="main">
+    <div class="gameArea">
+        <div class="display" style="font-size: 1.2vw">欢迎来到打枪游戏:<br>按 1 开始游戏<br>按 2 游戏介绍</div>
+        <div class="buttonGroup">
+            <button class="button" id="1" onclick="nextStep('1')">1</button>
+            <button class="button" id="2" onclick="nextStep('2')">2</button>
+            <button class="button" id="3" onclick="nextStep('3')">3</button>
+            <button id="buttonAgain" onclick="nextStep('4')">重玩</button>
+        </div>
+    </div>
+</div>
+<script>
+    let nowStep = 1, answer = false;
+
+    const all = {
+        display: document.querySelector(".display"),
+    };
+
+    function waitForAnyButton() {
+        return new Promise((resolve) => {
+            const buttons = [
+                document.getElementById("1"),
+                document.getElementById("2"),
+                document.getElementById("3")
+            ];
+
+            function handleClick(buttonId) {
+                buttons.forEach(btn => {
+                    btn.removeEventListener("click", clickHandler);
+                });
+                resolve(buttonId);
+            }
+
+            const clickHandler = function(e) {
+                const buttonId = e.target.id === "1" ? 1 :
+                    e.target.id === "2" ? 2 : 3;
+                handleClick(buttonId);
+            };
+
+            buttons.forEach(btn => {
+                btn.addEventListener("click", clickHandler);
+            });
+        });
+    }
+
+    function nextStep(nowClick) {
+        if (nowClick === '4') {
+            nowStep = 1;
+            answer = false;
+            all.display.innerHTML = "欢迎来到打枪游戏:<br>按 1 开始游戏<br>按 2 游戏介绍";
+        }
+
+        if (nowStep === 1) {
+            if (nowClick === '1') {
+                nowStep = 3;
+                for (let i = 1; i <= 9; i++) {
+                    if (i <= 3) answer = Play(1, 20, 50, answer);
+                    else if (i <= 6) answer = Play(2, 30, 35, answer);
+                    else answer = Play(3, 40, 20, answer);
+                    if (!answer) nextStep('4');
+                    all.display.innerHTML = null;
+                    answer = false;
+                }
+                all.display.innerHTML = "你打败了对手，游戏结束！";
+            } else if (nowClick === '2') {
+                nowStep = 2;
+                all.display.innerHTML = "本游戏是一款用文字来模拟类似俄罗斯转盘的推测类游戏:<br><br>A.游戏玩法<br><div class=\"level-1\">a.难度调节<br></div><div class=\"level-2\">难度（level）,分为3等（level 1、level 2、level 3 以百分数记），每过 3 关难度标准升级。<br></div><div class=\"level-2\">1.level 1 的游戏设置<br></div><div class=\"level-3\">在 level 1 难度中，人工智能方的射击概率为 20%，格挡概率为 50%，装弹概率为 30%。<br></div><div class=\"level-2\">2.level 2 的游戏设置<br></div><div class=\"level-3\">在 level 2 难度中，人工智能方的射击概率为 30%，格挡概率为 35%，装弹概率为 35%。<br></div><div class=\"level-2\">3.level 3 的游戏设置<br></div><div class=\"level-3\">在 level 3 难度中，人工智能方的射击概率为 40%，格挡概率为 20%，装弹概率为 40%。<br><br></div><div class=\"level-1\">b.玩家方的选择<br></div><div class=\"level-2\">1.射击（按钮 1）。<br></div><div class=\"level-2\">2.格挡（按钮 2）。<br></div><div class=\"level-2\">3.装弹（按钮 3）。</div><br>按 3 退出：";
+            }
+        } else if (nowStep === 2) {
+            if (nowClick === '3') nextStep('4');
+        }
+    }
+
+    async function Play(level, l, r, answer) {
+        all.display.innerHTML = `当前难度为 level-${level}<br>`;
+        let M_fire = 1, Ai_fire = 1;
+        while (!answer) {
+            let Ai = Math.floor(Math.random() * 100);
+            if (Ai < l) Ai = 1;
+            else if (Ai >= l && Ai < r) Ai = 2;
+            else Ai = 3;
+            all.display.innerHTML += `你的子弹数：${M_fire}   人工智能子弹数：${Ai_fire}<br>1.射击   2.格挡   3.装弹<br>你的选择：`;
+            const First = await waitForAnyButton();
+            if (First === Ai || First + 1 === Ai && First < Ai || First - 1 === Ai && First > Ai) {
+                if (First === 1 && M_fire !== 0) M_fire--;
+                if (Ai === 1 && Ai_fire !== 0) Ai_fire--;
+                if (First === 3) M_fire++;
+                if (Ai === 3) Ai_fire++;
+                all.display.innerHTML += "<br><span style='color: #ff0101; font-size: 1.3vw'>平局！</span>";
+                continue;
+            }
+            if (First === 1 && Ai === 3 && M_fire >= 1) {
+                all.display.innerHTML += "<br><span style='color: #ff0101; font-size: 1.3vw'>你赢了！</span>";
+                return true;
+            }
+            all.display.innerHTML += "<br><span style='color: #ff0101; font-size: 1.3vw'>你输了！</span>";
+            return false;
+        }
+    }
+</script>
+</body>
+</html>
+“
