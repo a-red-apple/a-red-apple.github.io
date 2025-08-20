@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>口算测试</title>
+    <style>
+
+        * {
+            font-family: "思源黑体 Light", "Source Han Sans CN Light", sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+
+        #main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            gap: 3rem;
+        }
+
+        #display1 {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            padding: 1vh;
+            width: 20vw;
+            height: 20vh;
+            border: 1px solid #bebebe;
+            border-radius: 0.3vw;
+        }
+
+        #button {
+            border: none;
+            font-size: 1.1vw;
+            height: 2.3vw;
+            width: 5.2vw;
+            line-height: 2.3vw;
+            text-align: center;
+            border-radius: 4px;
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+            padding: 0 0.08vw 0 0;
+        }
+
+        #userControl {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        #answerInput {
+            font-size: 1vw;
+            padding: 0.75vh;
+            width: 70%;
+            height: 200%;
+            border: 1px solid #bebebe;
+        }
+
+    </style>
+</head>
+<body>
+<div id="main">
+    <div id="display1">
+        <div id="display2" style="font-size: 1.4vw">点击按钮开始挑战！</div>
+    </div>
+    <div id="userControl">
+        <textarea id="answerInput" placeholder="请输入答案..."></textarea>
+        <button id="button" onclick="getQuestion('easy')">确定</button>
+    </div>
+</div>
+<script>
+    const all = {
+        display: document.getElementById("display2"),
+        answerInput: document.getElementById("answerInput"),
+    };
+
+    window.addEventListener('load', () => {
+        all.answerInput.focus();
+    });
+
+    function getQuestion(level) {
+        let question;
+        if (level === "easy") {
+            let numbersNum = Math.floor(Math.random() * 100) % 4 + 2;
+            question = Math.floor(Math.random() * 100) % 91 + 10;
+            for (let i = 1; i < numbersNum; i++) {
+                let op = Math.floor(Math.random() * 100) % 2;
+                if (op === 0) op = '+';
+                else if (op === 1) op = '-';
+                question += ` ${op} ${Math.floor(Math.random() * 100) % 91 + 10}`;
+            }
+            all.display.innerHTML = question + " = ";
+        }
+        all.answerInput.value = '';
+        all.answerInput.focus();
+    }
+</script>
+</body>
+</html>
