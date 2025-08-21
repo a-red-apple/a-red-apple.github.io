@@ -37,6 +37,13 @@
             border-radius: 0.3vw;
         }
 
+        #display2 {
+            width: 19vw;
+            height: 19vh;
+            font-size: 1.4vw;
+            overflow-y: auto;
+        }
+
         #button {
             border: none;
             font-size: 1.1vw;
@@ -64,6 +71,7 @@
             width: 70%;
             height: 200%;
             border: 1px solid #bebebe;
+            resize: none;
         }
 
     </style>
@@ -71,14 +79,16 @@
 <body>
 <div id="main">
     <div id="display1">
-        <div id="display2" style="font-size: 1.4vw">点击按钮开始挑战！</div>
+        <div id="display2">点击按钮开始挑战！</div>
     </div>
     <div id="userControl">
         <textarea id="answerInput" placeholder="请输入答案..."></textarea>
-        <button id="button" onclick="getQuestion('easy')">确定</button>
+        <button id="button" onclick="getQuestion('easy')">开始</button>
     </div>
 </div>
 <script>
+    let doing = false, trueAnswer = 0;
+
     const all = {
         display: document.getElementById("display2"),
         answerInput: document.getElementById("answerInput"),
@@ -90,16 +100,35 @@
 
     function getQuestion(level) {
         let question;
-        if (level === "easy") {
-            let numbersNum = Math.floor(Math.random() * 100) % 4 + 2;
-            question = Math.floor(Math.random() * 100) % 91 + 10;
-            for (let i = 1; i < numbersNum; i++) {
-                let op = Math.floor(Math.random() * 100) % 2;
-                if (op === 0) op = '+';
-                else if (op === 1) op = '-';
-                question += ` ${op} ${Math.floor(Math.random() * 100) % 91 + 10}`;
+        if (!doing) {
+            if (level === "easy") {
+                let numbersNum = Math.floor(Math.random() * 100) % 4 + 2;
+                let first = Math.floor(Math.random() * 100) % 91 + 10;
+                question = first;
+                trueAnswer = first;
+                for (let i = 1; i < numbersNum; i++) {
+                    let op = Math.floor(Math.random() * 100) % 2;
+                    let second = Math.floor(Math.random() * 100) % 91 + 10;
+                    if (op === 0) {
+                        op = '+';
+                        trueAnswer += second;
+                    } else if (op === 1) {
+                        op = '-';
+                        trueAnswer -= second;
+                    }
+                    question += ` ${op} ${second}`;
+                }
+                all.display.innerHTML = question + " = ";
+                doing = true;
             }
-            all.display.innerHTML = question + " = ";
+        } else {
+            if (all.answerInput.value.toString() === trueAnswer.toString()) {
+                all.display.innerHTML = "<span style='color: #008000'>答对了！</span>";
+                doing = false;
+                trueAnswer = 0;
+            } else {
+                all.display.innerHTML += "<span style='color: #ff0000'>答错了！</span>";
+            }
         }
         all.answerInput.value = '';
         all.answerInput.focus();
