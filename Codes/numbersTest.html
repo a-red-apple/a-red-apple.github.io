@@ -8,6 +8,7 @@
 
         * {
             font-family: "思源黑体 Light", "Source Han Sans CN Light", sans-serif;
+            transition: all 0.3s ease;
         }
 
         body {
@@ -23,7 +24,7 @@
             align-items: center;
             height: 100vh;
             width: 100vw;
-            gap: 3rem;
+            gap: 10%;
         }
 
         #display1 {
@@ -47,8 +48,8 @@
         #button {
             border: none;
             font-size: 1.1vw;
-            height: 2.3vw;
-            width: 5.2vw;
+            height: 3vw;
+            width: 8vw;
             line-height: 2.3vw;
             text-align: center;
             border-radius: 4px;
@@ -62,7 +63,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 1.5rem;
+            gap: 20%;
         }
 
         #answerInput {
@@ -74,10 +75,32 @@
             resize: none;
         }
 
+        #now {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            width: 50%;
+        }
+
+        #state {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #9c9c9c;
+            border-radius: 0.3vw;
+            width: 8vw;
+            height: 2vw;
+            padding: 0.5vh;
+            font-size: 1vw;
+        }
+
     </style>
 </head>
 <body>
 <div id="main">
+    <div id="now">
+        <div id="state"><strong>None</strong></div>
+    </div>
     <div id="display1">
         <div id="display2">点击按钮开始挑战！</div>
     </div>
@@ -92,6 +115,7 @@
     const all = {
         display: document.getElementById("display2"),
         answerInput: document.getElementById("answerInput"),
+        state: document.getElementById("state"),
     };
 
     window.addEventListener('load', () => {
@@ -123,11 +147,13 @@
             }
         } else {
             if (all.answerInput.value.toString() === trueAnswer.toString()) {
-                all.display.innerHTML = "<span style='color: #008000'>答对了！</span>";
+                all.state.style.backgroundColor = "#00c800";
+                all.state.innerHTML = "<span style='color: #ffffff'><strong>Accepted</strong></span>";
                 doing = false;
                 trueAnswer = 0;
             } else {
-                all.display.innerHTML += "<span style='color: #ff0000'>答错了！</span>";
+                all.state.style.backgroundColor = "#ff0000";
+                all.state.innerHTML = "<span style='color: #ffffff'><strong>Wrong Answer</strong></span>";
             }
         }
         all.answerInput.value = '';
