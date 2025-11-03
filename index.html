@@ -57,16 +57,18 @@
         }
 
         .downloadList {
+            display: flex;
             background-color: #f2f2f2;
             border: 1px solid #e4e4e4;
             border-radius: 0.5vw;
-            padding: 15px 13px 30px;
+            padding: 1vw 1vw 1vw;
             flex-direction: column;
             align-items: center;
+            gap: 1vw;
         }
 
-        #downloadButton {
-            padding: 8px 16px;
+        .downloadButton {
+            padding: 0.5vw 1vw;
             cursor: pointer;
             background-color: #87ceeb;
             border-radius: 0.3vw;
@@ -81,6 +83,14 @@
             flex-direction: column;
             border-top: 1px solid #e4e4e4;
             min-height: 60px;
+            font-size: clamp(0.75rem, 1vw, 1rem);
+        }
+
+        .end span {
+            width: 80%;
+            text-align: center;
+            word-break: break-all;
+            padding: 0 10px;
         }
     </style>
 </head>
@@ -91,8 +101,7 @@
 </div>
 <div class="download">
     <div class="downloadList">
-        <p>点击按钮下载 cpp 程序</p>
-        <button id="downloadButton" onclick="document.getElementById('downloadLink').click()">
+        <button class="downloadButton" onclick="document.getElementById('downloadLink').click()">
             <svg width="20" height="20" viewBox="0 2 24 24" xmlns="http://www.w3.org/2000/svg"
                  style="vertical-align: middle">
                 <path d="M11 5C11 4.44772 11.4477 4 12 4C12.5523 4 13 4.44772 13 5V12.1578L16.2428 8.91501L17.657 10.3292L12.0001 15.9861L6.34326 10.3292L7.75748 8.91501L11 12.1575V5Z"
@@ -100,11 +109,35 @@
                 <path d="M4 14H6V18H18V14H20V18C20 19.1046 19.1046 20 18 20H6C4.89543 20 4 19.1046 4 18V14Z"
                       fill="currentColor"/>
             </svg>
-            下载 打枪游戏.cpp
+            下载 打枪游戏
         </button>
         <a id="downloadLink" href="/Codes/打枪游戏.cpp" download="打枪游戏.cpp" style="display: none"></a>
+
+        <button class="downloadButton" onclick="document.getElementById('downloadLink2').click()">
+            <svg width="20" height="20" viewBox="0 2 24 24" xmlns="http://www.w3.org/2000/svg"
+                 style="vertical-align: middle">
+                <path d="M11 5C11 4.44772 11.4477 4 12 4C12.5523 4 13 4.44772 13 5V12.1578L16.2428 8.91501L17.657 10.3292L12.0001 15.9861L6.34326 10.3292L7.75748 8.91501L11 12.1575V5Z"
+                      fill="currentColor"/>
+                <path d="M4 14H6V18H18V14H20V18C20 19.1046 19.1046 20 18 20H6C4.89543 20 4 19.1046 4 18V14Z"
+                      fill="currentColor"/>
+            </svg>
+            下载 CSP-J 2025 成绩表
+        </button>
+        <a id="downloadLink2" href="/Files/【民间数据】CSP-J 2025 SD 批量测试.xlsx" download="【民间数据】CSP-J 2025 SD 批量测试.xlsx" style="display: none"></a>
+
+        <button class="downloadButton" onclick="document.getElementById('downloadLink3').click()">
+            <svg width="20" height="20" viewBox="0 2 24 24" xmlns="http://www.w3.org/2000/svg"
+                 style="vertical-align: middle">
+                <path d="M11 5C11 4.44772 11.4477 4 12 4C12.5523 4 13 4.44772 13 5V12.1578L16.2428 8.91501L17.657 10.3292L12.0001 15.9861L6.34326 10.3292L7.75748 8.91501L11 12.1575V5Z"
+                      fill="currentColor"/>
+                <path d="M4 14H6V18H18V14H20V18C20 19.1046 19.1046 20 18 20H6C4.89543 20 4 19.1046 4 18V14Z"
+                      fill="currentColor"/>
+            </svg>
+            下载 CSP-S 2025 成绩表
+        </button>
+        <a id="downloadLink3" href="/Files/【民间数据】CSP-S 2025 SD 批量测试.xlsx" download="【民间数据】CSP-S 2025 SD 批量测试.xlsx" style="display: none"></a>
     </div>
-    <span id="playOnlineGame" style="color: black; transition: all 0.25s ease;">单击此处<a class="Links" style="color: #0000ff; transition: all 0.25s ease;" href="/Games/gunGame.html"><s>在线游玩</s></a> 或者 <a class="Links" style="color: #0000ff; transition: all 0.25s ease;" href="/Codes/numbersTest.html">练习口算</a></span>
+    <span id="playOnlineGame" style="color: black; transition: all 0.25s ease;">单击此处<a class="Links" style="color: #0000ff; transition: all 0.25s ease;" href="/Games/gunGame.html"><s>在线玩打枪游戏</s></a> 或者 <a class="Links" style="color: #0000ff; transition: all 0.25s ease;" href="/Codes/numbersTest.html">练习口算</a></span>
 </div>
 <div class="end">
     <span>Copyright © 2025–2025 <strong>线条本条的网站 a-red-apple.github.io</strong> All Rights Reserved.</span>
@@ -138,3 +171,4 @@
 </script>
 </body>
 </html>
+
